@@ -1,0 +1,56 @@
+plugins {
+    // Apply the app plugin to add support for Java
+    id 'java'
+
+    id 'application'
+
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+
+    id 'io.spring.dependency-management' version '1.0.6.RELEASE'
+
+    // Apply the groovy plugin to also add support for Groovy (needed for Spock)
+    id 'groovy'
+}
+
+
+mainClassName = 'com.app.graphql.App'
+
+group = 'com.app'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    jcenter()
+
+    maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local" }
+}
+
+dependencies {
+    implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:5.9.0'
+
+    runtime 'com.graphql-java-kickstart:altair-spring-boot-starter:5.9.0'
+
+    // to embed GraphiQL tool
+    runtime 'com.graphql-java-kickstart:graphiql-spring-boot-starter:5.9.0'
+
+    // to embed Voyager tool
+    runtime 'com.graphql-java-kickstart:voyager-spring-boot-starter:5.9.0'
+
+    // testing facilities
+    testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:5.9.0'
+
+    // This dependency is found on compile classpath of this component and consumers.
+    implementation 'com.google.guava:guava:26.0-jre'
+
+    // Use the latest Groovy version for Spock testing
+    testImplementation 'org.codehaus.groovy:groovy-all:2.5.4'
+
+    // Use the awesome Spock testing and specification framework even with Java
+    testImplementation 'org.spockframework:spock-core:1.2-groovy-2.5'
+
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+}
