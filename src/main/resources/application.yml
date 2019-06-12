@@ -5,6 +5,15 @@ spring:
     multipart:
       enabled: true
       location: /tmp
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/world
+    username: root
+    password: rootpassword
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
 server:
   port: 9000
 management:
@@ -13,6 +22,7 @@ management:
       exposure:
         include: health,info,metrics
 graphql:
+  enabled: true
   servlet:
     actuator-metrics: true
 altair:

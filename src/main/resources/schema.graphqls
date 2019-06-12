@@ -1,0 +1,11 @@
+type Query {
+  cityById(id: ID): City
+}
+
+type City {
+  ID: ID
+  Name: String
+  CountryCode: String
+  District: String
+  Population: String
+}

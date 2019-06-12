@@ -5,5 +5,5 @@ package com.app.graphql
 
 import spock.lang.Specification
 
-class AppTest extends Specification {
+class GraphQLApplicationTest extends Specification {
 }
