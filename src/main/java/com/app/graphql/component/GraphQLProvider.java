@@ -17,8 +17,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-@Configuration
+@Component
 public class GraphQLProvider {
+
+    private GraphQL graphQL;
+
+    @Bean
+    public GraphQL graphQL() {
+        return graphQL;
+    }
 
     @Autowired
     private GraphQLDataFetchers graphQLDataFetchers;
@@ -26,8 +33,8 @@ public class GraphQLProvider {
     @Autowired
     ResourceLoader resourceLoader;
 
-    @Bean
-    public GraphQLSchema schema() throws IOException {
+    @PostConstruct
+    public void init() throws IOException {
 
         SchemaParser schemaParser = new SchemaParser();
         SchemaGenerator schemaGenerator = new SchemaGenerator();
@@ -35,7 +42,9 @@ public class GraphQLProvider {
         TypeDefinitionRegistry typeDefinitionRegistry = schemaParser.parse(resourceLoader.getResource("classpath:schema.graphqls").getFile());
         RuntimeWiring wiring = buildRuntimeWiring();
 
-        return schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, wiring);
+        this.graphQL = GraphQL
+                .newGraphQL(schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, wiring)).build();
+
     }
 
     private RuntimeWiring buildRuntimeWiring() {
