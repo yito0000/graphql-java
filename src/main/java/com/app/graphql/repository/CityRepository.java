@@ -1,6 +1,6 @@
 package com.app.graphql.repository;
 
-import com.app.graphql.dto.City;
+import com.app.graphql.entity.City;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

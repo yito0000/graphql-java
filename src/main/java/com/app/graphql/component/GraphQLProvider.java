@@ -1,7 +1,6 @@
 package com.app.graphql.component;
 
 import graphql.GraphQL;
-import graphql.schema.DataFetcher;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.*;
 import org.checkerframework.checker.units.qual.A;
@@ -17,8 +16,6 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class GraphQLProvider {
@@ -44,14 +41,7 @@ public class GraphQLProvider {
     private RuntimeWiring buildRuntimeWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type(TypeRuntimeWiring.newTypeWiring("Query")
-                        .dataFetchers(dataFetcherBuild())
+                        .dataFetcher("cityById", graphQLDataFetchers.getCityDataFetcher())
                 ).build();
-    }
-
-    private Map<String, DataFetcher> dataFetcherBuild() {
-        Map<String, DataFetcher> map = new HashMap<>();
-        map.put("cityById", graphQLDataFetchers.getCityDataFetcher());
-        map.put("countryByCode", graphQLDataFetchers.getCountryDataFetcher());
-        return map;
     }
 }

@@ -1,4 +1,4 @@
-package com.app.graphql.dto;
+package com.app.graphql.entity;
 
 import lombok.Data;
 
