@@ -7,7 +7,7 @@ spring:
       location: /tmp
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://db:3306/world
+    url: jdbc:mysql://localhost:3306/world
     username: root
     password: rootpassword
     type: com.zaxxer.hikari.HikariDataSource
