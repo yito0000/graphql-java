@@ -1,19 +1,14 @@
 # graphql-java
 
 ### 実行手順
-ビルド実行
-```
-gradle build
-```
-
-docker-composeで起動するための準備
-```
-/bin/bash createTargetDependency.sh
-```
-
-起動
+DBサーバ用意
 ```
 docker-compose up -d
+```
+
+APサーバ起動
+```
+gradle bootRun
 ```
 
 ### 動作確認
