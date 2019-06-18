@@ -1,34 +1,40 @@
 package com.app.graphql.component;
 
-import com.app.graphql.entity.City;
-import com.app.graphql.repository.CityRepository;
-import com.google.common.collect.ImmutableMap;
+import com.app.graphql.converter.CityConverter;
+import com.app.graphql.converter.CountryConverter;
+import com.app.graphql.dto.City;
+import com.app.graphql.dto.Country;
+import com.app.graphql.mapper.CityMapper;
+import com.app.graphql.mapper.CountryMapper;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 @Component
 public class GraphQLDataFetchers {
 
     @Autowired
-    private CityRepository cityRepository;
+    private CityMapper cityMapper;
+
+    @Autowired
+    private CountryMapper countryMapper;
 
     public DataFetcher getCityDataFetcher() {
         return environment -> {
             String id = environment.getArgument("id");
-            City city = cityRepository.findById(Integer.parseInt(id));
-            return convertCityToMap(city);
+            City city = cityMapper.findById(Integer.parseInt(id));
+            return CityConverter.convertToMap(city);
         };
     }
 
-    private Map<String, String> convertCityToMap(City city) {
-        return ImmutableMap.of("ID", city.getId().toString(),
-                "Name", city.getName(),
-                "CountryCode", city.getCountryCode(),
-                "District", city.getDistrict(),
-                "Population",city.getPopulation().toString());
+    public DataFetcher getCountryDataFetcher() {
+        return environment -> {
+            String code = environment.getArgument("code");
+            Country country = countryMapper.findByCode(code);
+            System.out.println(country.getIndepYear() == null);
+            System.out.println(country.toString());
+            return CountryConverter.convertToMap(country);
+        };
     }
 
 }

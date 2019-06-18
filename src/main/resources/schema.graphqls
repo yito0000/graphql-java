@@ -1,5 +1,6 @@
 type Query {
   cityById(id: ID): City
+  countryByCode(code: String): Country
 }
 
 type City {
@@ -8,4 +9,33 @@ type City {
   CountryCode: String
   District: String
   Population: String
+}
+
+type Country {
+  Code: String
+  Name: String
+  Continent: Continent
+  Region: String
+  SurfaceArea: Float
+  IndepYear: Int
+  Population: Int
+  LifeExpectancy: Float
+  GNP: Float
+  GNPOld: Float
+  LocalName: String
+  GovernmentForm: String
+  HeadOfState: String
+  Capital: Int
+  Code2: String
+}
+
+enum Continent {
+  Asia
+  Europe
+  North_America
+  Africa
+  Oceania
+  Antarctica
+  South_America
+
 }
