@@ -21,3 +21,5 @@ management:
     web:
       exposure:
         include: health,info,metrics
+mybatis:
+  config-location: classpath:mybatis-config.xml
